@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Product } from 'src/app/models/product';
-import { HttpClient } from '@angular/common/http';
 import { ProductResponseModel } from 'src/app/models/productResponseModel';
+import { ProductService } from 'src/app/services/product.service';
 
 //React için axios,fetch ile @angular daki httpclient ın aynı işlemini yapıyor
 @Component({
@@ -11,13 +11,14 @@ import { ProductResponseModel } from 'src/app/models/productResponseModel';
 })
 export class ProductComponent implements OnInit {
   products: Product[] = [];
+  dataLoaded=false;
   apiUrl = 'https://localhost:44350/api/products/getall';
   // productResponseModel: ProductResponseModel = {
   //   data: this.products,
   //   message: '',
   //   success: true,
   // };
-  constructor(private httpClient: HttpClient) {}
+  constructor(private productService:ProductService) {}
 
   ngOnInit(): void {
     // console.log('Init Calisti');
@@ -25,10 +26,12 @@ export class ProductComponent implements OnInit {
   }
 
   getProducts() {
-    this.httpClient
-      .get<ProductResponseModel>(this.apiUrl)
-      .subscribe((response) => {
-        this.products = response.data;
-      });
+    // console.log("Api REquest Basladi")
+    this.productService.getProducts().subscribe(response=>{
+      this.products=response.data
+      this.dataLoaded=true;
+    })
+    // console.log("Request Bitti");
   }
+  // console.log("Metod Bitti");
 }
