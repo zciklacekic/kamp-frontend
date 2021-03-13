@@ -1,7 +1,22 @@
 <ul class="list-group">
-    <li class="list-group-item">An item</li>
-    <li class="list-group-item">A second item</li>
-    <li class="list-group-item">A third item</li>
-    <li class="list-group-item">A fourth item</li>
-    <li class="list-group-item">And a fifth one</li>
+    <li (click)="setCurrentCategory(category)" *ngFor="let category of categories" 
+    [class]=getCurrentCategoryClass(category)>{{category.categoryName}}</li> <!--class a bir değişken eşitlenecek ise [class] yazılmalı. text ise [] a gerek yok-->
   </ul>
+  <h5 *ngIf="currentCategory">{{currentCategory.categoryName}} seçtiniz</h5>
+
+  <!-- <div *ngIf="dataLoaded==false" class="spinner-border text-primary" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+<table *ngIf="dataLoaded!=false" class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Kategori</th>
+        </tr>
+    </thead>
+    <tr *ngFor="let category of categories">
+        <td>{{category.categoryId}}</td>
+        <td>{{category.categoryName}}</td>
+
+    </tr>
+</table> -->
