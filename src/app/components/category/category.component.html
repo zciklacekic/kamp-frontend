@@ -1,10 +1,12 @@
 <ul class="list-group">
-  <li routerLink="/products">Tüm Ürünler</li>
+  <li (click)="cleanCurrentCategory()" 
+    [class]=getAllCategoryClass()
+    routerLink="/products">Tüm Ürünler</li>
     <li (click)="setCurrentCategory(category)" 
     routerLink="/products/category/{{category.categoryId}}"
     *ngFor="let category of categories" 
-    [class]=getCurrentCategoryClass(category)>
-    {{category.categoryName}}</li> <!--class a bir değişken eşitlenecek ise [class] yazılmalı. text ise [] a gerek yok-->
+    [class]=getCurrentCategoryClass(category)> <!--class a bir değişken eşitlenecek ise [class] yazılmalı. text ise [] a gerek yok-->
+    {{category.categoryName}}</li> 
   </ul>
   <h5 *ngIf="currentCategory">{{currentCategory.categoryName}} seçtiniz</h5>
 
